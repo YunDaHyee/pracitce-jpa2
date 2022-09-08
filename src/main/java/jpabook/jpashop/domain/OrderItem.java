@@ -9,25 +9,27 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class OrderItem {
-	//외래키 값인 order/itemID를 그대로 가지는 게 아니라 객체를 가지게 되는 것.
-	/*@Id @GeneratedValue
+	@Id @GeneratedValue
 	@Column(name = "ORDER_ITEM_ID")
 	private Long id;
 	
+	/*
+	//외래키 값인 order/itemID를 그대로 가지는 게 아니라 객체를 가지게 되는 것.
 	@Column(name = "ORDER_ID")
 	private Long orderId;
-	*/
 	
-	@ManyToOne
-	@JoinColumn(name = "ITEM_ID")
-	private Item item;
+	@Column(name = "ITEM_ID")
+	private Long itemId;
+	*/
 	
 	@ManyToOne
 	@JoinColumn(name = "ORDER_ID")
 	private Order order;
 	
-	@Column(name = "ITEM_ID")
-	private Long itemId;
+	@ManyToOne
+	@JoinColumn(name = "ITEM_ID")
+	private Item item;
+	
 	private int orderPrice;
 	private int count;
 	
@@ -46,10 +48,6 @@ public class OrderItem {
 		}
 	*/
 	
-	
-	public Long getItemId() {
-		return itemId;
-	}
 	public Item getItem() {
 		return item;
 	}
@@ -62,9 +60,7 @@ public class OrderItem {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-	public void setItemId(Long itemId) {
-		this.itemId = itemId;
-	}
+	
 	public int getOrderPrice() {
 		return orderPrice;
 	}

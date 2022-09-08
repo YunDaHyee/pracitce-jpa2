@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -42,6 +43,10 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 	
+	@OneToOne
+	@JoinColumn(name="DELIVERY_ID") // FK를 주테이블인 Order에 두기로 했기 때문에 여기다가 함
+	private Delivery delivery;
+	
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +72,10 @@ public class Order {
 		this.status = status;
 	}
 	
-	// 양방향이라서 연관관계 편의 메서드 만들어줌
+	/*
+	양방향이라서 연관관계 편의 메서드 만들어줌
+	주문할 떄 배송지 정보 넣고싶다거나 그런 기능들을 넣을 수 있다.
+	 */
 	public void addOrderItem(OrderItem orderItem) {
 		/*
 			현재 나의 Order를 넣어서 양방향 연관관계를 만들어줌.
